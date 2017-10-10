@@ -44,13 +44,15 @@ UKF::UKF() {
   // Radar measurement noise standard deviation radius change in m/s
   std_radrd_ = 0.3;
 
-  /**
-  TODO:
-
-  Complete the initialization. See ukf.h for other member properties.
-
-  Hint: one or more values initialized above might be wildly off...
-  */
+  is_initialized_ = false;
+  time_us_ = 0.0;
+  n_x_ = 5;
+  n_aug_ = 7;
+  lambda_ = 3 - n_x_;
+  Xsig_pred_ = MatrixXd(n_x_, 2 * n_aug_ + 1);
+  weights_ = VectorXd(2 * n_aug_ + 1);
+  NIS_radar_ = 0.0;
+  NIS_laser_ = 0.0;
 }
 
 UKF::~UKF() {}
